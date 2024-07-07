@@ -11,6 +11,8 @@ type Tanzaku = {
   wish: string;
 };
 
+const API = process.env.NEXT_PUBLIC_API;
+
 export default function Home() {
   const [name, setName] = useState<string>('');
   const [wish, setWish] = useState<string>('');
@@ -19,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const fetchTanzakus = async () => {
       try {
-        const response = await axios.get<Tanzaku[]>('http://localhost:8000/api/tanzaku');
+        const response = await axios.get<Tanzaku[]>(`${API}/api/tanzaku`);
         setTanzakus(response.data);
       } catch (error) {
         console.error('Error fetching tanzakus:', error);
